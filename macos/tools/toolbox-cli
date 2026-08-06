@@ -1,0 +1,12 @@
+#!/bin/sh
+# Terminal entry point shipped inside toolbox desktop.app.
+# Resolve paths from this file so the command keeps working when Homebrew or a
+# user moves the entire app bundle to a different Applications directory.
+
+macos_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+resources_dir=$(CDPATH= cd -- "${macos_dir}/../Resources" && pwd)
+
+# Suppress bytecode writes because mutating a signed application bundle would
+# invalidate its signature and can make Gatekeeper reject later launches.
+export PYTHONDONTWRITEBYTECODE=1
+exec "${resources_dir}/python/bin/python3" -B "${resources_dir}/toolbox.py" "$@"

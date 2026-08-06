@@ -1,0 +1,348 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		24EBC1E030212998003B443A /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 24EBC1DF30212998003B443A /* README.md */; };
+		A10000000000000000000001 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000001 /* AppDelegate.swift */; };
+		A10000000000000000000002 /* Launcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000002 /* Launcher.swift */; };
+		A10000000000000000000003 /* toolboxURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000003 /* toolboxURL.swift */; };
+		A10000000000000000000004 /* Updater.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000004 /* Updater.swift */; };
+		A10000000000000000000005 /* tools/toolbox.py in Resources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000005 /* tools/toolbox.py */; };
+		A10000000000000000000006 /* toolbox.icns in Resources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000006 /* toolbox.icns */; };
+		A10000000000000000000007 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000009 /* main.swift */; };
+		A10000000000000000000008 /* TerminalInstaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000000000000000000000A /* TerminalInstaller.swift */; };
+		A10000000000000000000009 /* DownloadPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000000000000000000000B /* DownloadPreferences.swift */; };
+		A1000000000000000000000A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2000000000000000000000C /* Assets.xcassets */; };
+		A1000000000000000000000B /* Assets/AppIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = A2000000000000000000000D /* Assets/AppIcon.png */; };
+		A1000000000000000000000C /* ../LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = A2000000000000000000000E /* ../LICENSE */; };
+		A1000000000000000000000D /* ToolboxConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000000000000000000000F /* ToolboxConfig.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		24EBC1DF30212998003B443A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		A20000000000000000000001 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A20000000000000000000002 /* Launcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Launcher.swift; sourceTree = "<group>"; };
+		A20000000000000000000003 /* toolboxURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = toolboxURL.swift; sourceTree = "<group>"; };
+		A20000000000000000000004 /* Updater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Updater.swift; sourceTree = "<group>"; };
+		A20000000000000000000005 /* tools/toolbox.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = tools/toolbox.py; sourceTree = SOURCE_ROOT; };
+		A20000000000000000000006 /* toolbox.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = toolbox.icns; sourceTree = "<group>"; };
+		A20000000000000000000007 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
+		A20000000000000000000008 /* toolbox desktop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "toolbox desktop.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A20000000000000000000009 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		A2000000000000000000000A /* TerminalInstaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalInstaller.swift; sourceTree = "<group>"; };
+		A2000000000000000000000B /* DownloadPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadPreferences.swift; sourceTree = "<group>"; };
+		A2000000000000000000000C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = SOURCE_ROOT; };
+		A2000000000000000000000D /* Assets/AppIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Assets/AppIcon.png; sourceTree = SOURCE_ROOT; };
+		A2000000000000000000000E /* ../LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = ../LICENSE; sourceTree = SOURCE_ROOT; };
+		A2000000000000000000000F /* ToolboxConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolboxConfig.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A30000000000000000000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A40000000000000000000001 = {
+			isa = PBXGroup;
+			children = (
+				A40000000000000000000002 /* Sources/toolboxDesktop */,
+				A40000000000000000000003 /* Products */,
+				A2000000000000000000000C /* Assets.xcassets */,
+				A2000000000000000000000D /* Assets/AppIcon.png */,
+				A2000000000000000000000E /* ../LICENSE */,
+				24EBC1DF30212998003B443A /* README.md */,
+			);
+			sourceTree = "<group>";
+		};
+		A40000000000000000000002 /* Sources/toolboxDesktop */ = {
+			isa = PBXGroup;
+			children = (
+				A20000000000000000000009 /* main.swift */,
+				A20000000000000000000001 /* AppDelegate.swift */,
+				A20000000000000000000002 /* Launcher.swift */,
+				A20000000000000000000003 /* toolboxURL.swift */,
+				A20000000000000000000004 /* Updater.swift */,
+				A2000000000000000000000A /* TerminalInstaller.swift */,
+				A2000000000000000000000B /* DownloadPreferences.swift */,
+				A2000000000000000000000F /* ToolboxConfig.swift */,
+				A20000000000000000000005 /* tools/toolbox.py */,
+				A20000000000000000000006 /* toolbox.icns */,
+				A20000000000000000000007 /* Info.plist */,
+			);
+			path = Sources/toolboxDesktop;
+			sourceTree = "<group>";
+		};
+		A40000000000000000000003 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A20000000000000000000008 /* toolbox desktop.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A50000000000000000000001 /* toolbox desktop */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A90000000000000000000002 /* Build configuration list for PBXNativeTarget "toolbox desktop" */;
+			buildPhases = (
+				A30000000000000000000004 /* Stage toolbox.py */,
+				A30000000000000000000002 /* Sources */,
+				A30000000000000000000001 /* Frameworks */,
+				A30000000000000000000003 /* Resources */,
+				A30000000000000000000005 /* Bundle Python runtime */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "toolbox desktop";
+			productName = "toolbox desktop";
+			productReference = A20000000000000000000008 /* toolbox desktop.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A60000000000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2660;
+				LastUpgradeCheck = 2660;
+				TargetAttributes = {
+					A50000000000000000000001 = {
+						CreatedOnToolsVersion = 26.6;
+					};
+				};
+			};
+			buildConfigurationList = A90000000000000000000001 /* Build configuration list for PBXProject "toolboxDesktop" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A40000000000000000000001;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = A40000000000000000000003 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A50000000000000000000001 /* toolbox desktop */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A30000000000000000000003 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				24EBC1E030212998003B443A /* README.md in Resources */,
+				A10000000000000000000005 /* tools/toolbox.py in Resources */,
+				A10000000000000000000006 /* toolbox.icns in Resources */,
+				A1000000000000000000000A /* Assets.xcassets in Resources */,
+				A1000000000000000000000B /* Assets/AppIcon.png in Resources */,
+				A1000000000000000000000C /* ../LICENSE in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A30000000000000000000004 /* Stage toolbox.py */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/../toolbox/toolbox.py",
+			);
+			name = "Stage toolbox.py";
+			outputPaths = (
+				"$(SRCROOT)/tools/toolbox.py",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$SRCROOT/tools/setup-toolbox.sh\"\n";
+		};
+		A30000000000000000000005 /* Bundle Python runtime */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Bundle Python runtime";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$SRCROOT/tools/setup-python-runtime.sh\" \"$TARGET_BUILD_DIR/$CONTENTS_FOLDER_PATH/Resources/python\"\ncp \"$SRCROOT/tools/toolbox-cli\" \"$TARGET_BUILD_DIR/$CONTENTS_FOLDER_PATH/MacOS/toolbox\"\nchmod 755 \"$TARGET_BUILD_DIR/$CONTENTS_FOLDER_PATH/MacOS/toolbox\"\n\n# Xcode signs the outer app after this phase. Every nested executable must be\n# signed first with the same identity, including the shell CLI and CPython.\nif [ \"${CODE_SIGNING_ALLOWED:-YES}\" != \"NO\" ]; then\n  signing_identity=\"${EXPANDED_CODE_SIGN_IDENTITY:--}\"\n  codesign --force --sign \"$signing_identity\" --timestamp=none \"$TARGET_BUILD_DIR/$CONTENTS_FOLDER_PATH/MacOS/toolbox\"\n  find \"$TARGET_BUILD_DIR/$CONTENTS_FOLDER_PATH/Resources/python\" -type f -print0 | while IFS= read -r -d '' candidate; do\n    if file \"$candidate\" | grep -q 'Mach-O'; then\n      codesign --force --sign \"$signing_identity\" --timestamp=none \"$candidate\"\n    fi\n  done\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A30000000000000000000002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10000000000000000000007 /* main.swift in Sources */,
+				A10000000000000000000001 /* AppDelegate.swift in Sources */,
+				A10000000000000000000002 /* Launcher.swift in Sources */,
+				A10000000000000000000003 /* toolboxURL.swift in Sources */,
+				A10000000000000000000004 /* Updater.swift in Sources */,
+				A10000000000000000000008 /* TerminalInstaller.swift in Sources */,
+				A10000000000000000000009 /* DownloadPreferences.swift in Sources */,
+				A1000000000000000000000D /* ToolboxConfig.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A80000000000000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		A80000000000000000000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		A80000000000000000000003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "";
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				AUTOMATION_APPLE_EVENTS = NO;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
+				ENABLE_RESOURCE_ACCESS_CAMERA = NO;
+				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
+				ENABLE_RESOURCE_ACCESS_LOCATION = NO;
+				ENABLE_RESOURCE_ACCESS_PHOTO_LIBRARY = NO;
+				EXECUTABLE_NAME = toolboxDesktop;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = toolbox;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pisaucer.toolbox.desktop;
+				PRODUCT_NAME = "toolbox desktop";
+				RUNTIME_EXCEPTION_ALLOW_DYLD_ENVIRONMENT_VARIABLES = NO;
+				RUNTIME_EXCEPTION_ALLOW_JIT = NO;
+				RUNTIME_EXCEPTION_ALLOW_UNSIGNED_EXECUTABLE_MEMORY = NO;
+				RUNTIME_EXCEPTION_DEBUGGING_TOOL = YES;
+				RUNTIME_EXCEPTION_DISABLE_EXECUTABLE_PAGE_PROTECTION = NO;
+				RUNTIME_EXCEPTION_DISABLE_LIBRARY_VALIDATION = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				WRAPPER_NAME = "toolbox desktop.app";
+			};
+			name = Debug;
+		};
+		A80000000000000000000004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "";
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				AUTOMATION_APPLE_EVENTS = NO;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Q45C84R85X;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
+				ENABLE_RESOURCE_ACCESS_CAMERA = NO;
+				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
+				ENABLE_RESOURCE_ACCESS_LOCATION = NO;
+				ENABLE_RESOURCE_ACCESS_PHOTO_LIBRARY = NO;
+				EXECUTABLE_NAME = toolboxDesktop;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = toolbox;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pisaucer.toolbox.desktop;
+				PRODUCT_NAME = "toolbox desktop";
+				RUNTIME_EXCEPTION_ALLOW_DYLD_ENVIRONMENT_VARIABLES = NO;
+				RUNTIME_EXCEPTION_ALLOW_JIT = NO;
+				RUNTIME_EXCEPTION_ALLOW_UNSIGNED_EXECUTABLE_MEMORY = NO;
+				RUNTIME_EXCEPTION_DEBUGGING_TOOL = YES;
+				RUNTIME_EXCEPTION_DISABLE_EXECUTABLE_PAGE_PROTECTION = NO;
+				RUNTIME_EXCEPTION_DISABLE_LIBRARY_VALIDATION = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				WRAPPER_NAME = "toolbox desktop.app";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A90000000000000000000001 /* Build configuration list for PBXProject "toolboxDesktop" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A80000000000000000000001 /* Debug */,
+				A80000000000000000000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A90000000000000000000002 /* Build configuration list for PBXNativeTarget "toolbox desktop" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A80000000000000000000003 /* Debug */,
+				A80000000000000000000004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A60000000000000000000001 /* Project object */;
+}
