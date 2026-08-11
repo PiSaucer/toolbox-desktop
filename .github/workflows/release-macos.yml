@@ -54,11 +54,22 @@ jobs:
           echo "Main executable:"
           file "$APP/Contents/MacOS/toolboxDesktop"
 
-          echo "CLI executable:"
+          echo "CLI launcher:"
           file "$APP/Contents/MacOS/toolbox"
 
-          lipo -verify_arch arm64 "$APP/Contents/MacOS/toolboxDesktop"
-          lipo -verify_arch arm64 "$APP/Contents/MacOS/toolbox"
+          # toolboxDesktop is the compiled Swift executable and must be arm64.
+          if ! file "$APP/Contents/MacOS/toolboxDesktop" | grep -q "Mach-O 64-bit executable arm64"; then
+            echo "toolboxDesktop is not an arm64 Mach-O executable" >&2
+            exit 1
+          fi
+
+          # toolbox is intentionally a POSIX shell launcher, not a Mach-O binary.
+          if [ ! -x "$APP/Contents/MacOS/toolbox" ]; then
+            echo "toolbox CLI launcher is not executable" >&2
+            exit 1
+          fi
+
+          echo "arm64 application verification passed."
 
       - name: Build ZIP
         shell: bash
