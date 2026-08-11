@@ -8,7 +8,7 @@ import Foundation
 enum ToolboxConfig {
     // This is the single desktop version source. build-app.sh copies it into
     // Info.plist, and release-macos.yml requires release tags to match it.
-    static let version = "1.0.0"
+    static let version = "1.0.1"
     static let siteTitle = "toolbox"
     static let siteDescription = "My personal toolbox of utility scripts"
     static let siteAuthor = "PiSaucer"
