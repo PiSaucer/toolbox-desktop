@@ -1,0 +1,136 @@
+name: Release macOS app
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build macOS arm64
+    runs-on: macos-15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install packaging tools
+        run: brew install librsvg create-dmg
+
+      - name: Determine version
+        id: version
+        shell: bash
+        run: |
+          version="$(sed -n 's/^[[:space:]]*static let version = "\([^"]*\)"[[:space:]]*$/\1/p' macos/Sources/toolboxDesktop/ToolboxConfig.swift)"
+
+          if [[ -z "$version" ]]; then
+            echo "ToolboxConfig.version is missing or invalid" >&2
+            exit 1
+          fi
+
+          if [[ "$GITHUB_REF_TYPE" == "tag" ]]; then
+            tag_version="${GITHUB_REF_NAME#v}"
+
+            if [[ "$tag_version" != "$version" ]]; then
+              echo "Tag version $tag_version does not match ToolboxConfig.version $version" >&2
+              exit 1
+            fi
+          fi
+
+          echo "value=$version" >> "$GITHUB_OUTPUT"
+
+      - name: Build self-contained app
+        env:
+          BUILD_NUMBER: ${{ github.run_number }}
+        run: ./macos/scripts/build-app.sh
+
+      - name: Verify arm64 build
+        shell: bash
+        run: |
+          APP="macos/dist/toolbox desktop.app"
+
+          echo "Main executable:"
+          file "$APP/Contents/MacOS/toolboxDesktop"
+
+          echo "CLI executable:"
+          file "$APP/Contents/MacOS/toolbox"
+
+          lipo -verify_arch arm64 "$APP/Contents/MacOS/toolboxDesktop"
+          lipo -verify_arch arm64 "$APP/Contents/MacOS/toolbox"
+
+      - name: Build ZIP
+        shell: bash
+        run: |
+          cd macos/dist
+
+          ditto \
+            -c \
+            -k \
+            --sequesterRsrc \
+            --keepParent \
+            "toolbox desktop.app" \
+            "toolbox-desktop-${{ steps.version.outputs.value }}-macos.zip"
+
+      - name: Build styled DMG
+        shell: bash
+        run: |
+          ./macos/scripts/build-dmg.sh \
+            "macos/dist/toolbox desktop.app" \
+            "macos/dist/toolbox-desktop-${{ steps.version.outputs.value }}-macos.dmg"
+
+      - name: Record checksums
+        shell: bash
+        run: |
+          cd macos/dist
+
+          shasum -a 256 \
+            "toolbox-desktop-${{ steps.version.outputs.value }}-macos.dmg" \
+            > "toolbox-desktop-${{ steps.version.outputs.value }}-macos.dmg.sha256"
+
+          shasum -a 256 \
+            "toolbox-desktop-${{ steps.version.outputs.value }}-macos.zip" \
+            > "toolbox-desktop-${{ steps.version.outputs.value }}-macos.zip.sha256"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: toolbox-macos-arm64
+          path: |
+            macos/dist/toolbox-desktop-*-macos.dmg
+            macos/dist/toolbox-desktop-*-macos.dmg.sha256
+            macos/dist/toolbox-desktop-*-macos.zip
+            macos/dist/toolbox-desktop-*-macos.zip.sha256
+          if-no-files-found: error
+
+  publish:
+    name: Publish GitHub release
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: toolbox-macos-arm64
+          path: release-assets
+
+      - name: Create or update release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view "$GITHUB_REF_NAME" \
+            --repo "$GITHUB_REPOSITORY" \
+            >/dev/null 2>&1 || \
+          gh release create "$GITHUB_REF_NAME" \
+            --repo "$GITHUB_REPOSITORY" \
+            --title "$GITHUB_REF_NAME" \
+            --generate-notes
+
+          gh release upload "$GITHUB_REF_NAME" \
+            release-assets/*.dmg \
+            release-assets/*.dmg.sha256 \
+            release-assets/*.zip \
+            release-assets/*.zip.sha256 \
+            --repo "$GITHUB_REPOSITORY" \
+            --clobber
