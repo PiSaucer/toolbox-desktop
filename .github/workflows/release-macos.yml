@@ -14,7 +14,7 @@ jobs:
     runs-on: macos-15
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Install packaging tools
         run: brew install librsvg create-dmg
@@ -91,27 +91,18 @@ jobs:
             "macos/dist/toolbox desktop.app" \
             "macos/dist/toolbox-desktop-${{ steps.version.outputs.value }}-macos.dmg"
 
-      - name: Record checksums
+      - name: Show DMG checksum
         shell: bash
         run: |
-          cd macos/dist
-
           shasum -a 256 \
-            "toolbox-desktop-${{ steps.version.outputs.value }}-macos.dmg" \
-            > "toolbox-desktop-${{ steps.version.outputs.value }}-macos.dmg.sha256"
-
-          shasum -a 256 \
-            "toolbox-desktop-${{ steps.version.outputs.value }}-macos.zip" \
-            > "toolbox-desktop-${{ steps.version.outputs.value }}-macos.zip.sha256"
+            "macos/dist/toolbox-desktop-${{ steps.version.outputs.value }}-macos.dmg"
 
       - uses: actions/upload-artifact@v4
         with:
           name: toolbox-macos-arm64
           path: |
             macos/dist/toolbox-desktop-*-macos.dmg
-            macos/dist/toolbox-desktop-*-macos.dmg.sha256
             macos/dist/toolbox-desktop-*-macos.zip
-            macos/dist/toolbox-desktop-*-macos.zip.sha256
           if-no-files-found: error
 
   publish:
@@ -135,13 +126,100 @@ jobs:
             >/dev/null 2>&1 || \
           gh release create "$GITHUB_REF_NAME" \
             --repo "$GITHUB_REPOSITORY" \
-            --title "$GITHUB_REF_NAME" \
+            --title "${GITHUB_REF_NAME#v}" \
             --generate-notes
 
           gh release upload "$GITHUB_REF_NAME" \
             release-assets/*.dmg \
-            release-assets/*.dmg.sha256 \
             release-assets/*.zip \
-            release-assets/*.zip.sha256 \
             --repo "$GITHUB_REPOSITORY" \
             --clobber
+
+  update-homebrew:
+    name: Update Homebrew tap
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: publish
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: toolbox-macos-arm64
+          path: release-assets
+
+      - name: Determine release information
+        id: release
+        shell: bash
+        run: |
+          TAG="$GITHUB_REF_NAME"
+
+          if [[ ! "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "Release tag must use the vMAJOR.MINOR.PATCH format." >&2
+            exit 1
+          fi
+
+          version="${TAG#v}"
+          dmg="release-assets/toolbox-desktop-${version}-macos.dmg"
+
+          if [[ ! -f "$dmg" ]]; then
+            echo "DMG not found: $dmg" >&2
+            exit 1
+          fi
+
+          sha256="$(sha256sum "$dmg" | cut -d ' ' -f 1)"
+
+          echo "Version: $version"
+          echo "SHA256: $sha256"
+
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "sha256=$sha256" >> "$GITHUB_OUTPUT"
+
+      - name: Check out Homebrew tap
+        uses: actions/checkout@v6
+        with:
+          repository: PiSaucer/homebrew-tap
+          token: ${{ secrets.HOMEBREW_TAP_TOKEN }}
+          path: homebrew-tap
+
+      - name: Update toolbox-desktop cask
+        working-directory: homebrew-tap
+        env:
+          VERSION: ${{ steps.release.outputs.version }}
+          SHA256: ${{ steps.release.outputs.sha256 }}
+        run: |
+          ruby -e '
+            path = "Casks/toolbox-desktop.rb"
+            cask = File.read(path)
+
+            version_changed = cask.sub!(
+              /^\s*version ".*"$/,
+              %(  version "#{ENV.fetch("VERSION")}")
+            )
+
+            sha_changed = cask.sub!(
+              /^\s*sha256 ".*"$/,
+              %(  sha256 "#{ENV.fetch("SHA256")}")
+            )
+
+            abort "Cask is missing its version declaration" unless version_changed
+            abort "Cask is missing its sha256 declaration" unless sha_changed
+
+            File.write(path, cask)
+          '
+
+          echo "Updated cask:"
+          cat Casks/toolbox-desktop.rb
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add Casks/toolbox-desktop.rb
+          git diff --cached --check
+
+          if git diff --cached --quiet; then
+            echo "Homebrew cask is already up to date."
+            exit 0
+          fi
+
+          git commit -m "toolbox-desktop ${VERSION}"
+          git push
